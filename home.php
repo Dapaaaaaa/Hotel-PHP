@@ -1,7 +1,7 @@
 <?php
 // Lakukan pemeriksaan apakah pengguna sudah login atau belum
 session_start();
-if(!isset($_SESSION['id_user'])) {
+if(!isset($_SESSION ['id_user']) || $_SESSION['role'] !== 'admin') {
     // Jika sudah login, arahkan pengguna ke halaman home atau dashboard
     header("Location:login.php");
     exit; // Hentikan eksekusi lebih lanjut
@@ -40,8 +40,8 @@ if(!isset($_SESSION['id_user'])) {
     <!-- Tabel untuk menampilkan kamar yang kosong -->
     <table>
         <tr>
-            <th>Type</th>
             <th>Room Number</th>
+            <th>Type</th>
             <th>Price</th>
             <th>Availability</th>
         </tr>

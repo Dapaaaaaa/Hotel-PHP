@@ -15,9 +15,20 @@ $result = mysqli_query($conn, $query);
 
 // Periksa apakah hasil query menghasilkan baris data atau tidak
 if (mysqli_num_rows($result) == 1) {
-    // Jika user ditemukan, arahkan ke halaman beranda atau dashboard
-    $_SESSION['id_user'] = $username; // Simpan informasi pengguna dalam sesi
-    header("Location: home.php");
+    //ambil role user dari query 
+    $row = mysqli_fetch_assoc($result);
+    $role = $row['role'];
+
+    //simpan informasi user di dalam sesi
+    $_SESSION['id_user'] = $username;
+    $_SESSION['role'] = $role;
+    
+    //pengecekan role
+    if($role == 'admin') {
+        header("Location: home.php");
+    } else if ($role == 'user') {
+        header("Location: pemesanan.php");
+    }
     exit;
 } else {
     // Jika user tidak ditemukan, beri pesan kesalahan

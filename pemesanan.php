@@ -24,11 +24,11 @@ $result = mysqli_query($conn, $query);
     <h2>Hotel Booking Form</h2>
     <form action="pemesanan_process.php" method="post" id="bookingForm">
         <label for="nama">Nama:</label><br>
-        <input type="text" id="nama" name="nama"><br>
+        <input type="text" id="nama" name="nama" required><br>
         <label for="NIK">NIK:</label><br>
-        <input type="NIK" id="NIK" name="NIK"><br>
+        <input type="NIK" id="NIK" name="NIK" required><br>
         <label for="nomor_kamar">Nomor Kamar:</label><br>
-        <select id="nomor_kamar" name="nomor_kamar" onchange="showRoomInfo()">
+        <select id="nomor_kamar" name="nomor_kamar" onchange="showRoomInfo()" required>
             <?php
             // Loop untuk menampilkan opsi nomor kamar yang tersedia
             while ($row = mysqli_fetch_assoc($result)) {
@@ -39,9 +39,9 @@ $result = mysqli_query($conn, $query);
         <label for="harga">Harga:</label><br>
         <input type="text" id="harga" name="harga" readonly><br>
         <label for="tanggal_checkin">Tanggal Check-in:</label><br>
-        <input type="date" id="tanggal_checkin" name="tanggal_checkin"><br>
+        <input type="date" id="tanggal_checkin" name="tanggal_checkin" required><br>
         <label for="tanggal_checkout">Tanggal Check-out:</label><br>
-        <input type="date" id="tanggal_checkout" name="tanggal_checkout"><br>
+        <input type="date" id="tanggal_checkout" name="tanggal_checkout" required><br>
         <input type="submit" value="Pesan!">
     </form>
 
