@@ -11,7 +11,7 @@ if(!isset($_SESSION['id_user'])) {
 $conn = mysqli_connect("localhost", "root", "", "hotel");
 
 // Query untuk mengambil data kamar yang statusnya tersedia
-$query = "SELECT id, nomor_kamar, harga FROM kamar WHERE status = 'Tersedia'";
+$query = "SELECT id, nomor_kamar, tipe_kamar, harga FROM kamar WHERE status = 'Tersedia'";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -22,6 +22,8 @@ $result = mysqli_query($conn, $query);
 </head>
 <body>
     <h2>Hotel Booking Form</h2>
+    <a href="logout.php"><button>Logout</button></a>
+
     <form action="pemesanan_process.php" method="post" id="bookingForm">
         <label for="nama">Nama:</label><br>
         <input type="text" id="nama" name="nama" required><br>
@@ -32,10 +34,12 @@ $result = mysqli_query($conn, $query);
             <?php
             // Loop untuk menampilkan opsi nomor kamar yang tersedia
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<option value='" . $row['id'] . "' data-harga='" . $row['harga'] . "'>" . $row['nomor_kamar'] . "</option>";
+                echo "<option value='" . $row['id'] . "' data-harga='" . $row['harga'] . "' data-tipe='" . $row['tipe_kamar'] . "'>" . $row['nomor_kamar'] . "</option>";
             }
             ?>
         </select><br>
+        <label for="tipe_kamar">Tipe kamar:</label><br>
+        <input type="text" id="tipe_kamar" name="tipe_kamar" readonly><br>
         <label for="harga">Harga:</label><br>
         <input type="text" id="harga" name="harga" readonly><br>
         <label for="tanggal_checkin">Tanggal Check-in:</label><br>
@@ -54,8 +58,12 @@ $result = mysqli_query($conn, $query);
             var nomorKamar = document.getElementById("nomor_kamar").value;
             // Mendapatkan data harga kamar dari atribut data-harga
             var hargaKamar = document.getElementById("nomor_kamar").selectedOptions[0].getAttribute("data-harga");
+            // Mendapatkan data tipe akmar dari atribut data-tipe
+            var tipeKamar = document.getElementById("nomor_kamar").selectedOptions[0].getAttribute("data-tipe");
             // Memasukkan harga kamar ke dalam input harga
             document.getElementById("harga").value = hargaKamar;
+            // Memasukkan tipe kamar ke dalam input tipe
+            document.getElementById("tipe_kamar").value = tipeKamar;
         }
     </script>
 </body>

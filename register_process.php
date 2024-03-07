@@ -3,16 +3,13 @@
 $conn = mysqli_connect("localhost", "root", "", "hotel");
 
 // Ambil data dari form
-$NIK = $_POST['NIK'];
-$nama = $_POST['nama'];
 $username = $_POST['username'];
 $password = $_POST['password'];
 $email = $_POST['email'];
-$alamat = $_POST['alamat'];
 $role = 'user';
 
 // Query untuk menyimpan data ke database
-$query = "INSERT INTO user (NIK, nama, username, password, email, alamat, role) VALUES ('$NIK','$nama','$username', '$password', '$email', '$alamat', '$role')";
+$query = "INSERT INTO user (username, password, email, role) VALUES ('$username', '$password', '$email', '$role')";
 $result = mysqli_query($conn, $query);
 
 // Cek apakah query berhasil
